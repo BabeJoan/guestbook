@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Admin - Guestbook</title>
+<style>body{font-family:sans-serif;padding:20px;max-width:900px;margin:auto;} img{max-width:200px}</style>
+</head>
+<body>
+  <h2>Guestbook Admin</h2>
+  <p>Enter admin token to view messages</p>
+  <input id="token" placeholder="Admin token" style="width:60%"/>
+  <button id="load">Load Messages</button>
+  <div id="list"></div>
+
+  <script>
+    document.getElementById('load').onclick = async () => {
+      const token = document.getElementById('token').value.trim();
+      if (!token) return alert('Enter admin token');
+      const res = await fetch(`/api/getMessages?token=${encodeURIComponent(token)}`);
+      if (!res.ok) { alert('Failed to load'); return; }
+      const data = await res.json();
+      const list = document.getElementById('list');
+      list.innerHTML = '';
+      data.forEach(m => {
+        const d = document.createElement('div');
+        d.style.border='1px solid #ddd'; d.style.padding='8px'; d.style.margin='8px 0';
+        d.innerHTML = `<div><strong>${m.board_id}</strong> • ${new Date(m.created_at).toLocaleString()}</div>
+                       <div>${m.content || ''}</div>
+                       ${m.image_url?('<div><img src="'+m.image_url+'"></div>') : ''}`;
+        list.appendChild(d);
+      });
+    };
+  </script>
+</body>
+</html>
