@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Guestbook</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.28.0/dist/supabase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/supabase.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 
   <style>
@@ -13,7 +13,7 @@
 </head>
 <body>
   <h2>Leave a message</h2>
-  <p>Share a short message for the birthday person. (Photos optional)</p>
+  <p>Share a message for Qiuyi. (Photos optional)</p>
 
   <input id="boardId" placeholder="Board ID (ask owner)" style="width:100%;margin-bottom:8px;" />
   <textarea id="text" placeholder="Your message"></textarea>
@@ -27,7 +27,7 @@
     // 填入你的 Supabase URL 与 ANON KEY（部署前替换/或用环境注入在部署步骤）
     const SUPABASE_URL = "https://gqfnjqbpwibadwjvvwft.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdxZm5qcWJwd2liYWR3anZ2d2Z0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTIxMTEsImV4cCI6MjA3NjcyODExMX0.nInGbzyEDkYORebmDdvJn7HjLK0IpeEQj0hboB7puwM";
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const supabase = supabaseJs.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     async function uploadImage(file) {
       if (!file) return null;
