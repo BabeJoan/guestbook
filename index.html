@@ -33,7 +33,8 @@
     async function uploadImage(file) {
       if (!file) return null;
       const ext = file.name.split('.').pop();
-      const fileName = `img_${Date.now()}.${ext}`;
+      // 放到 public 文件夹下
+      const fileName = `public/img_${Date.now()}.${ext}`;
       const { data, error } = await sb.storage
         .from('guestbook-images')
         .upload(fileName, file, { cacheControl: '3600', upsert: false });
@@ -44,6 +45,7 @@
       // 返回 public URL
       return `${SUPABASE_URL}/storage/v1/object/public/guestbook-images/${fileName}`;
     }
+
 
 
     document.getElementById('submit').onclick = async () => {
