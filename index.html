@@ -27,7 +27,7 @@
     // 填入你的 Supabase URL 与 ANON KEY（部署前替换/或用环境注入在部署步骤）
     const SUPABASE_URL = "https://gqfnjqbpwibadwjvvwft.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdxZm5qcWJwd2liYWR3anZ2d2Z0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTIxMTEsImV4cCI6MjA3NjcyODExMX0.nInGbzyEDkYORebmDdvJn7HjLK0IpeEQj0hboB7puwM";
-    const supabase = supabaseJs.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     async function uploadImage(file) {
       if (!file) return null;
