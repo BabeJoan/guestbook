@@ -37,10 +37,14 @@
       const { data, error } = await sb.storage
         .from('guestbook-images')
         .upload(fileName, file, { cacheControl: '3600', upsert: false });
-      if (error) { console.error(error); return null; }
-      // public URL
-      return `${SUPABASE_URL.replace('https://','https://')}/storage/v1/object/public/guestbook-images/${fileName}`;
+      if (error) {
+        console.error('Storage upload error:', error);
+        return null;
+      }
+      // 返回 public URL
+      return `${SUPABASE_URL}/storage/v1/object/public/guestbook-images/${fileName}`;
     }
+
 
     document.getElementById('submit').onclick = async () => {
       const boardId = document.getElementById('boardId').value.trim();
