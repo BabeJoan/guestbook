@@ -27,13 +27,13 @@
     // 填入你的 Supabase URL 与 ANON KEY（部署前替换/或用环境注入在部署步骤）
     const SUPABASE_URL = "https://gqfnjqbpwibadwjvvwft.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdxZm5qcWJwd2liYWR3anZ2d2Z0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTIxMTEsImV4cCI6MjA3NjcyODExMX0.nInGbzyEDkYORebmDdvJn7HjLK0IpeEQj0hboB7puwM";
-    const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     async function uploadImage(file) {
       if (!file) return null;
       const ext = file.name.split('.').pop();
       const fileName = `img_${Date.now()}.${ext}`;
-      const { data, error } = await supabase.storage
+      const { data, error } = await sb.storage
         .from('guestbook-images')
         .upload(fileName, file, { cacheControl: '3600', upsert: false });
       if (error) { console.error(error); return null; }
@@ -51,7 +51,7 @@
       if (fileInput.files.length > 0) {
         image_url = await uploadImage(fileInput.files[0]);
       }
-      const { error } = await supabase
+      const { error } = await sb
         .from('messages')
         .insert([{ board_id: boardId, content: text, image_url }]);
       if (error) {
